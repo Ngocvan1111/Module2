@@ -2,10 +2,14 @@ package ss0_test;
 
 public class test1 {
     public static void main(String[] args) {
-        double a = 10;
-        double b = 3;
-        double c;
-        c = a/b;
-        System.out.printf("%.2f%s",c,"Anh Thắng");
+        int i = 1;
+        while(i < 5){
+            if(i % 3 != 0){
+                i++;
+                continue;
+            }
+            System.out.println("Hello");
+            i++;
+        }
     }
 }
