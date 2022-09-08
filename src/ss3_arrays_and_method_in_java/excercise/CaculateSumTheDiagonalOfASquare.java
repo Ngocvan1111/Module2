@@ -20,14 +20,9 @@ public class CaculateSumTheDiagonalOfASquare {
         double sum = 0.0;
         for(int i=0;i<arrays.length;i++){
             for (int j = 0;j<arrays.length;j++){
-                if(i==j || j ==(arrays.length-1)-i){
+                if(i==j){
                    sum += arrays[i][j];
                 }
-                if(arrays.length%2 !=0&&i == (arrays.length-1)/2 && j == (arrays[i].length-1)/2){
-                    sum += arrays[i][j];
-
-                }
-
             }
         }
         for (double[] arrj:arrays){

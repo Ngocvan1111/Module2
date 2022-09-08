@@ -43,12 +43,8 @@ public class SumValueInColumn {
         // Tính tổng.
         int sum =0;
         for (double[] doubles : arr) {
-            for (int j = 0; j < doubles.length; j++) {
-                if (j == indexColumn) {
-                    sum += doubles[j];
-                }
+                    sum += doubles[indexColumn];
             }
-        }
         System.out.println("The array we have: ");
         for (double[] arrj:arr) {
             System.out.println(Arrays.toString(arrj));
