@@ -26,7 +26,7 @@ public class MaxNumberInArrays {
         System.out.print("Enter size i of array: ");
         int sizeI = Integer.parseInt(scanner.nextLine());
         System.out.print("Enter size j of array: ");
-        int sizeJ = Integer.parseInt(scanner.nextLine());;
+        int sizeJ = Integer.parseInt(scanner.nextLine());
         double[][]arr = new double[sizeI][sizeJ];
         for(int i =0;i<sizeI;i++){
             for (int j = 0; j<sizeJ;j++){

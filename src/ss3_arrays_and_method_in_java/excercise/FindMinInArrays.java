@@ -21,9 +21,9 @@ public class FindMinInArrays {
             arrays[i] = Integer.parseInt(scanner.nextLine());
         }
         int minNumber = arrays[0];
-        for (int i = 0; i< arrays.length; i++){
-            if(minNumber > arrays[i]){
-                minNumber = arrays[i];
+        for (int array : arrays) {
+            if (minNumber > array) {
+                minNumber = array;
             }
         }
         System.out.println("Array:  "+Arrays.toString(arrays));
