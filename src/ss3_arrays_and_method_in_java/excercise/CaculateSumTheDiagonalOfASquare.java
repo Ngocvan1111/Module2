@@ -19,17 +19,12 @@ public class CaculateSumTheDiagonalOfASquare {
     ////// tính toán.
         double sum = 0.0;
         for(int i=0;i<arrays.length;i++){
-            for (int j = 0;j<arrays.length;j++){
-                if(i==j){
-                   sum += arrays[i][j];
-                }
-            }
+                   sum += arrays[i][i];
         }
         for (double[] arrj:arrays){
             System.out.println(Arrays.toString(arrj));
         }
         System.out.println("Result: "+ sum);
-
 
     }
 }
