@@ -13,6 +13,7 @@ public class Test {
         shapes[7] = new Square();
         shapes[8] = new Circle();
         shapes[9] = new Rectangle();
+        Rectangle.change();
 //        shapes[10] = new Square();
         shapes[11] = new Circle();
         System.out.println(Shape.count);

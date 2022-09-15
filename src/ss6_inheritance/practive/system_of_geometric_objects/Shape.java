@@ -1,6 +1,8 @@
 package ss6_inheritance.practive.system_of_geometric_objects;
 
-public class Shape {
+import ss7_Abstract_class_interface.excercise.interface_colorable_for_class_geometric.colorable.Colorable;
+
+public abstract class Shape  {
     private String color = "red";
     private boolean filled = true;
     Shape(){
