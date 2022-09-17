@@ -1,4 +1,4 @@
-package ss9_dsa_list.practive.link_list;
+package ss10_dsa_list.practive.link_list;
 
 public class MyLinkedList {
     private Node head;

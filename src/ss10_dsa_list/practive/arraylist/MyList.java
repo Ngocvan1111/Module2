@@ -1,4 +1,4 @@
-package ss9_dsa_list.practive.arraylist;
+package ss10_dsa_list.practive.arraylist;
 
 import java.util.Arrays;
 

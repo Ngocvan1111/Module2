@@ -1,4 +1,4 @@
-package ss9_dsa_list.practive.arraylist;
+package ss10_dsa_list.practive.arraylist;
 
 public class MyListTest {
     public static void main(String[] args) {
