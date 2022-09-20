@@ -1,4 +1,4 @@
-package ss7_Abstract_class_interface.practive.check_brackets_in_expressions_using_stack;
+package ss11_DSA_stack_and_queue.excercise.check_brackets_in_expressions_using_stack;
 
 import java.util.LinkedList;
 import java.util.Queue;
