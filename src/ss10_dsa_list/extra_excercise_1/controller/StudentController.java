@@ -14,7 +14,9 @@ public class StudentController {
             System.out.println("1. Thêm mới sinh viên.");
             System.out.println("2. Xóa sinh viên");
             System.out.println("3. Xem danh sách sinh viên");
-            System.out.println("4. Thoát");
+            System.out.println("4. Tìm kiếm theo tên ");
+            System.out.println("5. Thoát");
+            System.out.println("6. Thêm dữ liệu ");
             System.out.print("Chọn chức năng: ");
             int choise = Integer.parseInt(scanner.nextLine());
             StudentService studentService = new StudentService();
@@ -30,7 +32,12 @@ public class StudentController {
                         studentService.display();
                     break;
                 case 4:
+                    studentService.research();
+                case 5:
                     System.exit(0);
+                    break;
+                case 6:
+                    studentService.addData();
                     break;
             }
         }}

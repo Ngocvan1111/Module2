@@ -31,28 +31,5 @@ public class Controller {
                 break;
                 }
         }}
-//    public static int subMenu1(){
-//        System.out.println("Chọn chức năng theo số (để tiếp tục): ");
-//        System.out.println("1. Thêm mới giảng viên");
-//        System.out.println("2. Thêm mới học sinh");
-//        System.out.print("Chọn chức năng: ");
-//        return Integer.parseInt(scanner.nextLine());
-//
-//    }
-//    public static int subMenu2(){
-//        System.out.println("Chọn chức năng theo số (để tiếp tục): ");
-//        System.out.println("1. Xóa giảng viên");
-//        System.out.println("2. Xóa học sinh");
-//        System.out.print("Chọn chức năng: ");
-//        return Integer.parseInt(scanner.nextLine());
-//
-//    }
-//    public static int subMenu3(){
-//        System.out.println("Chọn chức năng theo số (để tiếp tục): ");
-//        System.out.println("1. Xem danh sách giảng viên");
-//        System.out.println("2. Xem danh sách học sinh");
-//        System.out.print("Chọn chức năng: ");
-//        return Integer.parseInt(scanner.nextLine());
-//
-//    }
+
 }

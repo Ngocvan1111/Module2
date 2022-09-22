@@ -2,9 +2,6 @@ package ss12_java_collection_framwork.excercise.practice_using_arraylist_linkedl
 
 import ss12_java_collection_framwork.excercise.practice_using_arraylist_linkedlist_in_java_collection_framework.model.Product;
 import ss12_java_collection_framwork.excercise.practice_using_arraylist_linkedlist_in_java_collection_framework.service.IproductService;
-import ss12_java_collection_framwork.excercise.practice_using_arraylist_linkedlist_in_java_collection_framework.service.PriceComparable;
-import ss12_java_collection_framwork.excercise.practice_using_arraylist_linkedlist_in_java_collection_framework.service.PriceComparableHighToLow;
-import ss7_Abstract_class_interface.practive.interface_comparable_for_class_geometric.camparablecircle.ComparableCircle;
 
 import java.util.*;
 
@@ -105,6 +102,13 @@ public class ProductService extends Product implements IproductService, Comparab
         double price = Double.parseDouble(scanner.nextLine());
         Product product = new Product(id, name, price);
         return product;
+    }
+    public   void addData(){
+        productList.add(new Product("id123","Sản phẩm 1",10000));
+        productList.add(new Product("id123","Sản phẩm 2",12000));
+        productList.add(new Product("id132","Sản phẩm 3",9000));
+        productList.add(new Product("id133","Sản phẩm 4",20000));
+
     }
 
     @Override

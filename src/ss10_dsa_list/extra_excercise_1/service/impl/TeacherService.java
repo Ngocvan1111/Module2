@@ -46,6 +46,22 @@ public class TeacherService implements ITeacherService {
 
     }
 
+    @Override
+    public void research() {
+        System.out.println("Nhập tên giảng viên bạn muốn tìm ");
+        String teacherName = scanner.nextLine();
+        for (int i = 0; i < teacherList.size(); i++) {
+            if (teacherList.get(i).getName().contains(teacherName)) {
+                System.out.println("Đây có phải là tên bạn muốn tìm ?");
+                System.out.println(teacherList.get(i));
+                break;
+            }
+
+        }
+
+
+    }
+
     public Teacher getInfoStudent() {
         System.out.println("Nhập mã Giảng viên: ");
         String code = scanner.nextLine();
@@ -67,5 +83,12 @@ public class TeacherService implements ITeacherService {
         String major = scanner.nextLine();
         Teacher teacher = new Teacher(code, teacherName, birthday, gender, major);
         return teacher;
+    }
+
+    public void addData() {
+        teacherList.add(new Teacher("id221", "Nguyễn Thị Ánh", "06/12/1995", "Nữ", "Math"));
+        teacherList.add(new Teacher("id211", "Nguyễn Thị Huyền", "06/12/1995", "Nữ", "Music"));
+        teacherList.add(new Teacher("id233", "Nguyễn Thị Quỳnh", "06/12/1995", "Nữ", "Art"));
+        teacherList.add(new Teacher("id234", "Nguyễn Thị Tâm", "06/12/1995", "Nữ", "English"));
     }
 }

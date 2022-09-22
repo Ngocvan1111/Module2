@@ -45,6 +45,23 @@ public class StudentService implements IStudentService {
 
     }
 
+
+    @Override
+    public void research(){
+        System.out.println("Nhập tên sinh viên bạn muốn tìm: ");
+        String studentName = scanner.nextLine();
+        for(int i =0;i<studentList.size();i++){
+            if(studentList.get(i).getName().contains(studentName)){
+                System.out.println("Đây có phải là tên bạn muốn tìm ?");
+                System.out.println(studentList.get(i));
+                break;
+            }
+
+        }
+
+
+    }
+
     public Student getInfoStudent() {
         System.out.println("Nhập mã sinh viên: ");
         String code = scanner.nextLine();
@@ -68,5 +85,12 @@ public class StudentService implements IStudentService {
         int score = Integer.parseInt(scanner.nextLine());
         Student student = new Student(code, studentName, birthday, gender, className, score);
         return student;
+    }
+    public void addData(){
+        studentList.add(new Student("ID123","Lại Văn A","06/12/1994","Nam","C0722G1",10));
+        studentList.add(new Student("ID122","Lại Văn B ","06/12/1994","Nam","C0722G1",9));
+        studentList.add(new Student("ID125","Lại Văn C","06/12/1994","Nam","C0722G1",8));
+        studentList.add(new Student("ID121","Lại Văn D","06/12/1994","Nam","C0722G1",6));
+
     }
 }

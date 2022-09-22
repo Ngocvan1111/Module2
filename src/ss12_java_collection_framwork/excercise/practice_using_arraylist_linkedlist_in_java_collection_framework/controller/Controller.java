@@ -17,7 +17,8 @@ public class Controller {
             System.out.println("4. Hiện thị danh sách sản phẩm.");
             System.out.println("5. Tìm kiếm sản phẩm theo tên. ");
             System.out.println("6. Sắp xếp sản phẩm. ");
-            System.out.println("7. Thoát");
+            System.out.println("7. Thêm data vào list sản phẩm");
+            System.out.println("8. Thoát");
             System.out.print("Chọn chức năng: ");
             int choise = Integer.parseInt(scanner.nextLine());
             switch (choise){
@@ -40,6 +41,9 @@ public class Controller {
                     productService.arrangeProduct();
                     break;
                 case 7:
+                    productService.addData();
+                    break;
+                case 8:
                     System.exit(0);
 
             }
