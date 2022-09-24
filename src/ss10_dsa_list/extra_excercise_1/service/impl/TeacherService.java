@@ -1,6 +1,7 @@
 package ss10_dsa_list.extra_excercise_1.service.impl;
 
 import ss10_dsa_list.extra_excercise_1.model.Teacher;
+import ss10_dsa_list.extra_excercise_1.model.Teacher;
 import ss10_dsa_list.extra_excercise_1.service.ITeacherService;
 
 import java.util.ArrayList;
@@ -45,13 +46,72 @@ public class TeacherService implements ITeacherService {
 
 
     }
+    public void sort(){
+        for (int i = 0; i < teacherList.size() - 1; i++) {
+
+            for (int j = i; j < teacherList.size(); j++) {
+                boolean flag = true;
+
+                for (int k = 0; k < teacherList.get(i).getLastName().length() && k < teacherList.get(j).getLastName().length(); k++) {
+                    if (teacherList.get(i).getLastName().charAt(k) < teacherList.get(j).getLastName().charAt(k)) {
+                        flag = false;
+                        break;
+
+                    } else if (teacherList.get(i).getLastName().charAt(k) > teacherList.get(j).getLastName().charAt(k)) {
+                        Teacher temp = teacherList.get(i);
+                        System.out.println(temp);
+                        teacherList.set(i, teacherList.get(j));
+                        System.out.println(teacherList.get(i));
+                        teacherList.set(j, temp);
+                        System.out.println(teacherList.get(j));
+                        flag = false;
+                        break;
+                    }
+
+                }
+                if (flag) {
+                    if (teacherList.get(i).getLastName().length() > teacherList.get(j).getLastName().length()) {
+                        Teacher temp = teacherList.get(i);
+                        teacherList.set(i, teacherList.get(j));
+                        teacherList.set(j, temp);
+                    }
+                    if (teacherList.get(i).getLastName().length() == teacherList.get(j).getLastName().length()) {
+                        for (int y = 0; y < teacherList.get(i).getCode().length(); y++) {
+                            if ((int) (teacherList.get(i).getCode().charAt(y)) > (int) (teacherList.get(j).getCode().charAt(y))) {
+                                Teacher temp = teacherList.get(i);
+                                teacherList.set(i, teacherList.get(j));
+                                teacherList.set(j, temp);
+
+                            }
+
+                        }
+
+                    }
+
+                }
+
+            }
+
+        }
+
+    }
+
+
+    public void test(){
+
+    }
 
     @Override
     public void research() {
-        System.out.println("Nhập tên giảng viên bạn muốn tìm ");
+        System.out.println("Nhập tên giảng viên hoặc id bạn muốn tìm bạn muốn tìm ");
         String teacherName = scanner.nextLine();
         for (int i = 0; i < teacherList.size(); i++) {
             if (teacherList.get(i).getName().contains(teacherName)) {
+                System.out.println("Đây có phải là tên bạn muốn tìm ?");
+                System.out.println(teacherList.get(i));
+                break;
+            }
+            else if (teacherList.get(i).getCode().equals(teacherName)){
                 System.out.println("Đây có phải là tên bạn muốn tìm ?");
                 System.out.println(teacherList.get(i));
                 break;
@@ -86,9 +146,9 @@ public class TeacherService implements ITeacherService {
     }
 
     public void addData() {
-        teacherList.add(new Teacher("id221", "Nguyễn Thị Ánh", "06/12/1995", "Nữ", "Math"));
-        teacherList.add(new Teacher("id211", "Nguyễn Thị Huyền", "06/12/1995", "Nữ", "Music"));
-        teacherList.add(new Teacher("id233", "Nguyễn Thị Quỳnh", "06/12/1995", "Nữ", "Art"));
-        teacherList.add(new Teacher("id234", "Nguyễn Thị Tâm", "06/12/1995", "Nữ", "English"));
+        teacherList.add(new Teacher("id221", "Nguyen Thi Anh", "06/12/1995", "Nữ", "Math"));
+        teacherList.add(new Teacher("id211", "Nguyen Thi Anh", "06/12/1995", "Nữ", "Music"));
+        teacherList.add(new Teacher("id233", "Nguyen Thi Quynh", "06/12/1995", "Nữ", "Art"));
+        teacherList.add(new Teacher("id234", "Nguyen thi Tam", "06/12/1995", "Nữ", "English"));
     }
 }

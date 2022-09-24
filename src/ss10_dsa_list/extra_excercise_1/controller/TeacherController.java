@@ -15,9 +15,10 @@ public class TeacherController {
             System.out.println("1. Thêm mới giảng viên.");
             System.out.println("2. Xóa giảng viên");
             System.out.println("3. Xem danh sách giảng viên");
-            System.out.println("4. Tìm kiếm tên giảng viên theo tên ");
+            System.out.println("4. Tìm kiếm tên giảng viên ");
             System.out.println("5. Thoát");
             System.out.println("6. Thêm dữ liệu");
+            System.out.println("7. Sắp xếp");
             System.out.print("Chọn chức năng: ");
             int choise = Integer.parseInt(scanner.nextLine());
             TeacherService teacherService = new TeacherService();
@@ -39,6 +40,9 @@ public class TeacherController {
                     break;
                 case 6:
                     teacherService.addData();
+                    break;
+                case 7:
+                    teacherService.sort();
                     break;
             }
         }}

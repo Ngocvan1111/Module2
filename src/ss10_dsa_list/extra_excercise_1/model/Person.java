@@ -27,6 +27,10 @@ public abstract class Person {
     public String getName() {
         return name;
     }
+    public String getLastName(){
+        String[]arr = getName().split(" ");
+        return arr[arr.length-1];
+    }
 
     public void setName(String name) {
         this.name = name;

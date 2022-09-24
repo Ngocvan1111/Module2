@@ -6,6 +6,7 @@ public interface IPerson {
      void remove();
      void research();
      void addData();
+     void sort();
 
 }
 

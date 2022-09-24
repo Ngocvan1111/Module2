@@ -47,11 +47,15 @@ public class StudentService implements IStudentService {
 
 
     @Override
-    public void research(){
+    public void research() {
         System.out.println("Nhập tên sinh viên bạn muốn tìm: ");
         String studentName = scanner.nextLine();
-        for(int i =0;i<studentList.size();i++){
-            if(studentList.get(i).getName().contains(studentName)){
+        for (int i = 0; i < studentList.size(); i++) {
+            if (studentList.get(i).getName().contains(studentName)) {
+                System.out.println("Đây có phải là tên bạn muốn tìm ?");
+                System.out.println(studentList.get(i));
+                break;
+            } else if (studentList.get(i).getCode().equals(studentName)) {
                 System.out.println("Đây có phải là tên bạn muốn tìm ?");
                 System.out.println(studentList.get(i));
                 break;
@@ -61,6 +65,58 @@ public class StudentService implements IStudentService {
 
 
     }
+
+    public void sort() {
+
+        for (int i = 0; i < studentList.size() - 1; i++) {
+
+            for (int j = i; j < studentList.size(); j++) {
+                boolean flag = true;
+
+                for (int k = 0; k < studentList.get(i).getLastName().length() && k < studentList.get(j).getLastName().length(); k++) {
+                    if (studentList.get(i).getLastName().charAt(k) < studentList.get(j).getLastName().charAt(k)) {
+                        flag = false;
+                        break;
+
+                    } else if (studentList.get(i).getLastName().charAt(k) > studentList.get(j).getLastName().charAt(k)) {
+                        Student temp = studentList.get(i);
+                        System.out.println(temp);
+                        studentList.set(i, studentList.get(j));
+                        System.out.println(studentList.get(i));
+                        studentList.set(j, temp);
+                        System.out.println(studentList.get(j));
+                        flag = false;
+                        break;
+                    }
+
+                }
+                if (flag) {
+                    if (studentList.get(i).getLastName().length() > studentList.get(j).getLastName().length()) {
+                        Student temp = studentList.get(i);
+                        studentList.set(i, studentList.get(j));
+                        studentList.set(j, temp);
+                    }
+                    if (studentList.get(i).getLastName().length() == studentList.get(j).getLastName().length()) {
+                        for (int y = 0; y < studentList.get(i).getCode().length(); y++) {
+                            if ((int) (studentList.get(i).getCode().charAt(y)) > (int) (studentList.get(j).getCode().charAt(y))) {
+                                Student temp = studentList.get(i);
+                                studentList.set(i, studentList.get(j));
+                                studentList.set(j, temp);
+
+                            }
+
+                        }
+
+                    }
+
+                }
+
+            }
+
+        }
+
+    }
+
 
     public Student getInfoStudent() {
         System.out.println("Nhập mã sinh viên: ");
@@ -86,11 +142,14 @@ public class StudentService implements IStudentService {
         Student student = new Student(code, studentName, birthday, gender, className, score);
         return student;
     }
-    public void addData(){
-        studentList.add(new Student("ID123","Lại Văn A","06/12/1994","Nam","C0722G1",10));
-        studentList.add(new Student("ID122","Lại Văn B ","06/12/1994","Nam","C0722G1",9));
-        studentList.add(new Student("ID125","Lại Văn C","06/12/1994","Nam","C0722G1",8));
-        studentList.add(new Student("ID121","Lại Văn D","06/12/1994","Nam","C0722G1",6));
+
+    public void addData() {
+        studentList.add(new Student("ID123", "Lai Van Ngoc", "06/12/1994", "Nam", "C0722G1", 10));
+        studentList.add(new Student("ID122", "Lai Van Ngoc ", "06/12/1994", "Nam", "C0722G1", 9));
+        studentList.add(new Student("ID125", "Nguyen Van Chung", "06/12/1994", "Nam", "C0722G1", 8));
+        studentList.add(new Student("ID121", "Nguyen Van Nam", "06/12/1994", "Nam", "C0722G1", 6));
+        studentList.add(new Student("ID118", "Nguyen Van Trung", "06/12/1994", "Nam", "C0722G1", 6));
+        studentList.add(new Student("ID111", "Nguyen Van Trung", "06/12/1994", "Nam", "C0722G1", 6));
 
     }
 }
