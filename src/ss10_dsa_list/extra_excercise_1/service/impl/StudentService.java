@@ -1,5 +1,6 @@
 package ss10_dsa_list.extra_excercise_1.service.impl;
 
+import ss10_dsa_list.extra_excercise_1.exception.InputException;
 import ss10_dsa_list.extra_excercise_1.model.Student;
 import ss10_dsa_list.extra_excercise_1.service.IStudentService;
 
@@ -8,7 +9,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class StudentService implements IStudentService {
-    private Scanner scanner = new Scanner(System.in);
+    private static Scanner scanner = new Scanner(System.in);
     private static List<Student> studentList = new ArrayList<>();
 
     public void addNew() {
@@ -118,13 +119,51 @@ public class StudentService implements IStudentService {
     }
 
 
-    public Student getInfoStudent() {
-        System.out.println("Nhập mã sinh viên: ");
-        String code = scanner.nextLine();
-        System.out.println("Nhập tên sinh viên: ");
-        String studentName = scanner.nextLine();
-        System.out.println("Nhập ngày sinh: ");
-        String birthday = scanner.nextLine();
+    public  Student getInfoStudent() {
+        String code = "";
+        String studentName = "";
+        String className= "";
+        String birthday = "";
+        int score = 0;
+        while (true) {
+            try {
+                System.out.println("Nhập mã sinh viên: ");
+                code = scanner.nextLine();
+                checkCode(code);
+                break;
+
+            } catch (InputException e) {
+                e.printStackTrace();
+
+            }
+        }
+        while (true) {
+            try {
+                System.out.println("Nhập tên sinh viên: ");
+                studentName = scanner.nextLine();
+                checkName(studentName);
+                break;
+
+            } catch (InputException e) {
+                e.printStackTrace();
+
+            }
+        }
+        while (true) {
+            try {
+                System.out.println("Nhập ngày sinh: ");
+                birthday = scanner.nextLine();
+                checkBirthday(birthday);
+                break;
+
+            } catch (InputException e) {
+                e.printStackTrace();
+
+            }
+        }
+
+
+
         System.out.println("Nhập giới tính: ");
         String tempGender = scanner.nextLine();
         String gender;
@@ -135,10 +174,31 @@ public class StudentService implements IStudentService {
         } else {
             gender = "Thứ 3";
         }
-        System.out.println("Nhập lớp: ");
-        String className = scanner.nextLine();
-        System.out.println("Nhập điểm số: ");
-        int score = Integer.parseInt(scanner.nextLine());
+        while (true) {
+            try {
+                System.out.println("Nhập lớp: ");
+                className = scanner.nextLine();
+                checkClassName(className);
+                break;
+
+            } catch (InputException e) {
+                e.printStackTrace();
+
+            }
+        }
+        while (true) {
+            try {
+                System.out.println("Nhập điểm số: ");
+                score = Integer.parseInt(scanner.nextLine());
+                checkScore(score);
+                break;
+
+            } catch (InputException e) {
+                e.printStackTrace();
+
+            }
+        }
+
         Student student = new Student(code, studentName, birthday, gender, className, score);
         return student;
     }
@@ -152,4 +212,55 @@ public class StudentService implements IStudentService {
         studentList.add(new Student("ID111", "Nguyen Van Trung", "06/12/1994", "Nam", "C0722G1", 6));
 
     }
+
+    public  void checkCode(String code) throws InputException {
+        for (int i = 2; i < code.length(); i++) {
+            if (code.length() != 5 || code.charAt(0) != 'I' || code.charAt(1) != 'D' || (int)code.charAt(i) < 48 || (code.charAt(i) > 57)) {
+                throw new InputException("Sai định dạng mã code !!!");
+            }
+
+        }
+    }
+    public static void checkName(String name) throws InputException{
+        for (int i=0,j=1;i<name.length();i++,j++){
+            if(name.charAt(0) == ' '|| name.charAt(name.length()-1) == ' '|| (name.charAt(i) == ' '&&name.charAt(j) == ' ') || (name.charAt(i) < 65&& name.charAt(i) != 32) || ( 90 < name.charAt(i)&& name.charAt(i) < 97 )|| 122 < name.charAt(i)){
+                throw new InputException("Sai định dạng tên !!!");
+            }
+            if(j == name.length()-1){
+                j--;
+            }
+        }
+
+    }
+    public static void checkBirthday(String birthday) throws InputException{
+        for(int i =0;i<birthday.length();i++){
+            if(birthday.length() != 10 ){
+                throw new InputException("Sai định dạng ngày tháng ");
+            }
+        }
+    }
+    public static void checkGender(String gender) throws InputException{
+
+
+    }
+    public static void checkClassName(String className) throws InputException{
+        for(int i = 0;i<className.length();i++){
+            if(className.length() != 7 || className.charAt(0) != 'C'|| className.charAt(5) != 'G'|| className.charAt(className.length()-1) < 49 || className.charAt(className.length()-1) > 57 ){
+                throw new InputException("Sai định dạng lớp");
+            }
+            if( 0<i&&i<4){
+                if(className.charAt(i)< 47 || className.charAt(i)>57){
+                    throw new InputException("Sai định dạng lớp");
+                }
+            }
+        }
+
+    }
+    public static void checkScore(int score) throws InputException{
+        if(score < 0 || score > 10){
+            throw new InputException(" Sai định dạng điểm số !!");
+        }
+    }
+
+
 }

@@ -1,5 +1,6 @@
 package ss10_dsa_list.extra_excercise_1.service.impl;
 
+import ss10_dsa_list.extra_excercise_1.exception.InputException;
 import ss10_dsa_list.extra_excercise_1.model.Teacher;
 import ss10_dsa_list.extra_excercise_1.model.Teacher;
 import ss10_dsa_list.extra_excercise_1.service.ITeacherService;
@@ -123,12 +124,46 @@ public class TeacherService implements ITeacherService {
     }
 
     public Teacher getInfoStudent() {
-        System.out.println("Nhập mã Giảng viên: ");
-        String code = scanner.nextLine();
-        System.out.println("Nhập tên Giảng viên: ");
-        String teacherName = scanner.nextLine();
-        System.out.println("Nhập ngày sinh: ");
-        String birthday = scanner.nextLine();
+        String code = "";
+        String teacherName = "";
+        String birthday = "";
+        while (true) {
+            try {
+                System.out.println("Nhập mã Giảng viên: ");
+                code = scanner.nextLine();
+                checkCode(code);
+                break;
+
+            } catch (InputException e) {
+                e.printStackTrace();
+
+            }
+        }
+        while (true) {
+            try {
+                System.out.println("Nhập tên giảng viên: ");
+                teacherName = scanner.nextLine();
+                checkName(teacherName);
+                break;
+
+            } catch (InputException e) {
+                e.printStackTrace();
+
+            }
+        }
+        while (true) {
+            try {
+                System.out.println("Nhập ngày sinh: ");
+                birthday = scanner.nextLine();
+                checkBirthday(birthday);
+                break;
+
+            } catch (InputException e) {
+                e.printStackTrace();
+
+            }
+        }
+
         System.out.println("Nhập giới tính: ");
         String tempGender = scanner.nextLine();
         String gender;
@@ -151,4 +186,30 @@ public class TeacherService implements ITeacherService {
         teacherList.add(new Teacher("id233", "Nguyen Thi Quynh", "06/12/1995", "Nữ", "Art"));
         teacherList.add(new Teacher("id234", "Nguyen thi Tam", "06/12/1995", "Nữ", "English"));
     }
-}
+
+    public  void checkCode(String code) throws InputException {
+        for (int i = 2; i < code.length(); i++) {
+            if (code.length() != 5 || code.charAt(0) != 'I' || code.charAt(1) != 'D' || (int)code.charAt(i) < 48 || (code.charAt(i) > 57)) {
+                throw new InputException("Sai định dạng mã code !!!");
+            }
+
+        }
+    }
+    public static void checkName(String name) throws InputException{
+        for (int i=0,j=1;i<name.length();i++,j++){
+            if(name.charAt(0) == ' '|| name.charAt(name.length()-1) == ' '|| (name.charAt(i) == ' '&&name.charAt(j) == ' ') || (name.charAt(i) < 65&& name.charAt(i) != 32) || ( 90 < name.charAt(i)&& name.charAt(i) < 97 )|| 122 < name.charAt(i)){
+                throw new InputException("Sai định dạng tên !!!");
+            }
+            if(j == name.length()-1){
+                j--;
+            }
+        }
+
+    }
+    public static void checkBirthday(String birthday) throws InputException{
+        for(int i =0;i<birthday.length();i++){
+            if(birthday.length() != 10 ){
+                throw new InputException("Sai định dạng ngày tháng ");
+            }
+        }
+    }}
