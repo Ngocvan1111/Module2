@@ -208,8 +208,13 @@ public class TeacherService implements ITeacherService {
     }
     public static void checkBirthday(String birthday) throws InputException{
         for(int i =0;i<birthday.length();i++){
-            if(birthday.length() != 10 ){
+            if(birthday.length() != 10 || (birthday.charAt(2) != '/'&& birthday.charAt(5) != '/')){
                 throw new InputException("Sai định dạng ngày tháng ");
             }
-        }
-    }}
+            if(i==0||i==1||i==3||i==4||i==6||i==7||i==8||i==9){
+                if(birthday.charAt(i) < 48 || birthday.charAt(i) > 57){
+                    throw new InputException("Sai định dạng ngày tháng ");
+
+                }
+            }
+    }}}
