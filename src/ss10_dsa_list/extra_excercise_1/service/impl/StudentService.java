@@ -1,10 +1,13 @@
 package ss10_dsa_list.extra_excercise_1.service.impl;
 
+import com.sun.xml.internal.ws.policy.EffectiveAlternativeSelector;
 import ss10_dsa_list.extra_excercise_1.exception.InputException;
 import ss10_dsa_list.extra_excercise_1.model.Student;
 import ss10_dsa_list.extra_excercise_1.service.IStudentService;
 
+import java.io.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
@@ -12,14 +15,20 @@ public class StudentService implements IStudentService {
     private static Scanner scanner = new Scanner(System.in);
     private static List<Student> studentList = new ArrayList<>();
 
-    public void addNew() {
+    public StudentService() throws FileNotFoundException {
+    }
+
+    public void addNew() throws IOException {
+        studentList = getAllStudentInfoFromFile();
         Student student = this.getInfoStudent();
         studentList.add(student);
         System.out.println("Thêm mới ok!!!");
+        writeTofile(studentList);
 
     }
 
-    public void display() {
+    public void display() throws IOException {
+        studentList =  getAllStudentInfoFromFile();
         if (studentList.size() > 0) {
             for (Student student : studentList) {
                 System.out.println(student);
@@ -29,7 +38,8 @@ public class StudentService implements IStudentService {
         }
     }
 
-    public void remove() {
+    public void remove() throws IOException {
+        studentList = getAllStudentInfoFromFile();
         if (studentList.size() > 0) {
             System.out.println("Nhập mã sinh viên cần xóa: ");
             String coderm = scanner.nextLine();
@@ -38,6 +48,7 @@ public class StudentService implements IStudentService {
                     studentList.remove(i);
                 }
             }
+            writeTofile(studentList);
 
         } else {
             System.out.println("Danh sách trống: ");
@@ -48,7 +59,8 @@ public class StudentService implements IStudentService {
 
 
     @Override
-    public void research() {
+    public void research() throws IOException {
+        studentList = getAllStudentInfoFromFile();
         System.out.println("Nhập tên sinh viên bạn muốn tìm: ");
         String studentName = scanner.nextLine();
         for (int i = 0; i < studentList.size(); i++) {
@@ -67,7 +79,8 @@ public class StudentService implements IStudentService {
 
     }
 
-    public void sort() {
+    public void sort() throws IOException {
+        studentList = getAllStudentInfoFromFile();
 
         for (int i = 0; i < studentList.size() - 1; i++) {
 
@@ -115,6 +128,7 @@ public class StudentService implements IStudentService {
             }
 
         }
+        writeTofile(studentList);
 
     }
 
@@ -129,7 +143,7 @@ public class StudentService implements IStudentService {
             try {
                 System.out.println("Nhập mã sinh viên: ");
                 code = scanner.nextLine();
-                checkCode(code);
+                InputException.checkCode(code);
                 break;
 
             } catch (InputException e) {
@@ -141,7 +155,7 @@ public class StudentService implements IStudentService {
             try {
                 System.out.println("Nhập tên sinh viên: ");
                 studentName = scanner.nextLine();
-                checkName(studentName);
+                InputException.checkName(studentName);
                 break;
 
             } catch (InputException e) {
@@ -153,7 +167,7 @@ public class StudentService implements IStudentService {
             try {
                 System.out.println("Nhập ngày sinh: ");
                 birthday = scanner.nextLine();
-                checkBirthday(birthday);
+                InputException.checkBirthday(birthday);
                 break;
 
             } catch (InputException e) {
@@ -178,7 +192,7 @@ public class StudentService implements IStudentService {
             try {
                 System.out.println("Nhập lớp: ");
                 className = scanner.nextLine();
-                checkClassName(className);
+                InputException.checkClassName(className);
                 break;
 
             } catch (InputException e) {
@@ -190,7 +204,7 @@ public class StudentService implements IStudentService {
             try {
                 System.out.println("Nhập điểm số: ");
                 score = Integer.parseInt(scanner.nextLine());
-                checkScore(score);
+                InputException.checkScore(score);
                 break;
 
             } catch (InputException e) {
@@ -203,71 +217,36 @@ public class StudentService implements IStudentService {
         return student;
     }
 
-    public void addData() {
-        studentList.add(new Student("ID123", "Lai Van Ngoc", "06/12/1994", "Nam", "C0722G1", 10));
-        studentList.add(new Student("ID122", "Lai Van Ngoc ", "06/12/1994", "Nam", "C0722G1", 9));
-        studentList.add(new Student("ID125", "Nguyen Van Chung", "06/12/1994", "Nam", "C0722G1", 8));
-        studentList.add(new Student("ID121", "Nguyen Van Nam", "06/12/1994", "Nam", "C0722G1", 6));
-        studentList.add(new Student("ID118", "Nguyen Van Trung", "06/12/1994", "Nam", "C0722G1", 6));
-        studentList.add(new Student("ID111", "Nguyen Van Trung", "06/12/1994", "Nam", "C0722G1", 6));
-
-    }
-
-    public  void checkCode(String code) throws InputException {
-        for (int i = 2; i < code.length(); i++) {
-            if (code.length() != 5 || code.charAt(0) != 'I' || code.charAt(1) != 'D' || (int)code.charAt(i) < 48 || (code.charAt(i) > 57)) {
-                throw new InputException("Sai định dạng mã code !!!");
-            }
-
+    private List<Student> getAllStudentInfoFromFile() throws IOException{
+        studentList = new ArrayList<>();
+        File file = new File("D:\\01_codegym\\module2\\src\\ss10_dsa_list\\extra_excercise_1\\data\\student.csv");
+        FileReader fileReader = new FileReader(file);
+        BufferedReader bufferedReader = new BufferedReader(fileReader);
+        String line ;
+        String[] studentArrays;
+        while ((line = bufferedReader.readLine()) != null){
+            studentArrays = line.split(",");
+            studentList.add(new Student(studentArrays[0],studentArrays[1],studentArrays[2],studentArrays[3],studentArrays[4],Double.parseDouble(studentArrays[5])));
         }
-    }
-    public static void checkName(String name) throws InputException{
-        for (int i=0,j=1;i<name.length();i++,j++){
-            if(name.charAt(0) == ' '|| name.charAt(name.length()-1) == ' '|| (name.charAt(i) == ' '&&name.charAt(j) == ' ') || (name.charAt(i) < 65&& name.charAt(i) != 32) || ( 90 < name.charAt(i)&& name.charAt(i) < 97 )|| 122 < name.charAt(i)){
-                throw new InputException("Sai định dạng tên !!!");
-            }
-            if(j == name.length()-1){
-                j--;
-            }
-        }
+        bufferedReader.close();
+        return studentList;
 
     }
-    public static void checkBirthday(String birthday) throws InputException{
-        for(int i =0;i<birthday.length();i++){
-            if(birthday.length() != 10 || (birthday.charAt(2) != '/'&& birthday.charAt(5) != '/')){
-                throw new InputException("Sai định dạng ngày tháng ");
-            }
-            if(i==0||i==1||i==3||i==4||i==6||i==7||i==8||i==9){
-                if(birthday.charAt(i) < 48 || birthday.charAt(i) > 57){
-                    throw new InputException("Sai định dạng ngày tháng ");
-
-                }
-            }
-        }
-
+    private void writeTofile(List<Student> studentList) throws IOException {
+        File file = new  File("D:\\01_codegym\\module2\\src\\ss10_dsa_list\\extra_excercise_1\\data\\student.csv");
+        String line =null;
+        FileWriter fileWriter = new FileWriter(file);
+        BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+      for (Student s:studentList) {
+          bufferedWriter.write(s.getInfor());
+          bufferedWriter.newLine();
+      }
+        bufferedWriter.close();
     }
-    public static void checkGender(String gender) throws InputException{
 
 
-    }
-    public static void checkClassName(String className) throws InputException{
-        for(int i = 0;i<className.length();i++){
-            if(className.length() != 7 || className.charAt(0) != 'C'|| className.charAt(5) != 'G'|| className.charAt(className.length()-1) < 49 || className.charAt(className.length()-1) > 57 ){
-                throw new InputException("Sai định dạng lớp");
-            }
-            if( 0<i&&i<4){
-                if(className.charAt(i)< 47 || className.charAt(i)>57){
-                    throw new InputException("Sai định dạng lớp");
-                }
-            }
-        }
 
-    }
-    public static void checkScore(int score) throws InputException{
-        if(score < 0 || score > 10){
-            throw new InputException(" Sai định dạng điểm số !!");
-        }
-    }
+
 
 
 }

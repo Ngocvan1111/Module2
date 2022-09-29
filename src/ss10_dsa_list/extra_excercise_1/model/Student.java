@@ -18,6 +18,7 @@ public class Student extends Person {
         this.score = score;
     }
 
+
     public String getClassName() {
         return className;
     }
@@ -39,5 +40,8 @@ public class Student extends Person {
     @Override
     public String toString() {
         return "///***Họ tên: "+super.getName()+", Code: " + super.getCode()+", Ngày sinh: "+super.getBirthDay()+", giới tính: "+ getGender()+", lớp: "+getClassName()+", điểm số: "+getScore();
+    }
+    public String getInfor(){
+        return String.format("%s,%s,%s,%s,%s",super.getCode(),super.getName(),super.getBirthDay(),getGender(),getScore());
     }
 }

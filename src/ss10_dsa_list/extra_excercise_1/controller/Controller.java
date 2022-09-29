@@ -4,12 +4,13 @@ import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
 import ss10_dsa_list.extra_excercise_1.service.IPerson;
 import ss10_dsa_list.extra_excercise_1.service.impl.StudentService;
 
+import java.io.IOException;
 import java.util.Scanner;
 
 public class Controller {
     public static Scanner scanner = new Scanner(System.in);
 
-    public static void menuManage(){
+    public static void menuManage() throws IOException {
         while (true){
         System.out.println("--CHƯƠNG TRÌNH QUẢN LÝ SINH VIÊN VÀ GIẢNG VIÊN--");
         System.out.println("Chọn chức năng theo số (để tiếp tục): ");
