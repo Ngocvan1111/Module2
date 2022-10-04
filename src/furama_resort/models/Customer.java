@@ -1,5 +1,7 @@
 package furama_resort.models;
 
+import java.time.LocalDate;
+
 public class Customer extends Person {
     private String customerType;
     private String address;
@@ -7,11 +9,12 @@ public class Customer extends Person {
     public Customer() {
     }
 
-    public Customer(String code, String name, String birthday, String gender, int identityCard, int phoneNumber, String email, String customerType, String address) {
+    public Customer(String code, String name, LocalDate birthday, String gender, int identityCard, int phoneNumber, String email, String customerType, String address) {
         super(code, name, birthday, gender, identityCard, phoneNumber, email);
         this.customerType = customerType;
         this.address = address;
     }
+
 
     public String getCustomerType() {
         return customerType;
@@ -36,7 +39,8 @@ public class Customer extends Person {
                 ", address='" + address + '\'' +
                 '}';
     }
-    public String getInfo(){
-        return super.getInfo()+ String.format(" ,%s,%s",this.customerType,this.address);
+
+    public String getInfo() {
+        return String.format("%s,%s,%s",super.getInfo(), this.customerType, this.address);
     }
 }

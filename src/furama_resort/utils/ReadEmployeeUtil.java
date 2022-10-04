@@ -7,6 +7,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,7 +21,7 @@ public class ReadEmployeeUtil {
         String[] customerArrays;
         while ((line = bufferedReader.readLine()) != null){
             customerArrays = line.split(",");
-            customerList.add(new Customer(customerArrays[0],customerArrays[1],customerArrays[2],customerArrays[3],Integer.parseInt(customerArrays[4]),Integer.parseInt(customerArrays[5]),customerArrays[6],customerArrays[7],customerArrays[8]));
+            customerList.add(new Customer(customerArrays[0],customerArrays[1], LocalDate.parse(customerArrays[2]) ,customerArrays[3],Integer.parseInt(customerArrays[4]),Integer.parseInt(customerArrays[5]),customerArrays[6],customerArrays[7],customerArrays[8]));
         }
         bufferedReader.close();
         return customerList;

@@ -1,5 +1,7 @@
 package furama_resort.models;
 
+import java.time.LocalDate;
+
 public class Employee extends Person {
     private String level;
     private String position;
@@ -8,7 +10,7 @@ public class Employee extends Person {
     public Employee() {
     }
 
-    public Employee(String code, String name, String birthday, String gender, int identityCard, int phoneNumber, String email, String level, String position, double salary) {
+    public Employee(String code, String name, LocalDate birthday, String gender, int identityCard, int phoneNumber, String email, String level, String position, double salary) {
         super(code, name, birthday, gender, identityCard, phoneNumber, email);
         this.level = level;
         this.position = position;
