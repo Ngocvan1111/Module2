@@ -10,47 +10,14 @@ import java.time.format.DateTimeParseException;
 import java.util.List;
 
 import java.util.Scanner;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 
 public class ValidateUtil {
     private static Scanner scanner = new Scanner(System.in);
-    public static String code() throws IOException {
-        List<Customer> customerList = ReadEmployeeUtil.readCustomerDataFromFile();
-
-        String code;
-        while (true){
-            try {
-
-                System.out.println("Nhập mã khách hàng: ");
-                code = scanner.nextLine();
-                String regex = "^[E]\\d{4}";
-                Pattern pattern = Pattern.compile(regex);
-                Matcher matcher = pattern.matcher(code);
-                if(!matcher.matches()){
-                    throw new CodeNameException("Sai định dạng");
-                }
-                for(int i = 0;i<customerList.size();i++){
-                    if(customerList.get(i).getCode().equals(code)){
-                        throw new CodeNameException("Code đã tồn tại !!!");
-
-                    }
-                }
-                break;
-            }catch (CodeNameException e){
-                e.printStackTrace();
-            }
-
-
-        }return code;
-
-    }
     public static String name(){
         String name;
         while (true){
             try {
-                System.out.println("Nhập tên khách hàng: ");
+                System.out.println("Nhập tên : ");
                 name = scanner.nextLine();
                 String regex = "^([A-ZĐ][a-záàảãạăâẩắằấầặẵẫêậéèẻẽẹếềểễệóòỏõọôốồổỗộơớờởỡợíìỉĩịđùúủũụưứửữựỷỹ]+[ ])+[A-ZĐ][a-záàảãạăâẩắằấầặẵẫậéèẻẽẹếềểễệóòêỏõọôốồổỗộơớờởỡợíìỉĩịđùúủũụưứửữựỷỹ]+$";
                 if(!name.matches(regex)){
@@ -80,16 +47,16 @@ public class ValidateUtil {
                 year = Integer.parseInt(dayOfBirthArr[0]);
                 month = Integer.parseInt(dayOfBirthArr[1]);
                 day = Integer.parseInt(dayOfBirthArr[2]);
-                if(year > LocalDate.now().getYear()){
-                    throw new BirthdayException("over year now");
+                if(year < LocalDate.now().getYear() -18){
+                    throw new BirthdayException("not enough old ");
                 }
                 else if(year == LocalDate.now().getYear()){
-                    if( month >  LocalDate.now().getMonthValue()){
-                        throw new BirthdayException("over month now");
+                    if( month <  LocalDate.now().getMonthValue()){
+                        throw new BirthdayException("not enough old");
                     }
                     else if(month == LocalDate.now().getMonthValue()){
-                        if(day > LocalDate.now().getDayOfMonth()){
-                            throw new BirthdayException("over day now");
+                        if(day < LocalDate.now().getDayOfMonth()){
+                            throw new BirthdayException("not enough old");
                         }
                     }
                 }
@@ -109,7 +76,6 @@ public class ValidateUtil {
                 System.out.println("1. Male");
                 System.out.println("2. Female");
                 System.out.println("3. Unknow");
-
                 int choise = Integer.parseInt(scanner.nextLine());
                 InputSectionException.checkInputChoiseForGender(choise);
                 switch (choise){
@@ -131,20 +97,24 @@ public class ValidateUtil {
         }
         return gender;
     }
-    public static int identityCard(){
-        int regex = [\\d{9}];
-        int identityCard;
+
+    public static String email(){
+        final String EMAIL_REGEX = "^[a-zA-Z0-9]+[A-Za-z0-9]*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)$";
+        String email;
         while (true){
             try {
-                System.out.println("Nhập CMND: ");
-                identityCard = Integer.parseInt(scanner.nextLine());
-                if(!identityCard.matches(regex)){
-                   throw new IdentityCardException("Sai định dạng");
+                System.out.println("Nhập vào email: ");
+                email = scanner.nextLine();
+                if(!email.matches(EMAIL_REGEX)){
+                    throw new EmailException("Lỗi định dạng");
                 }
-
-            }catch (IdentityCardException e){
+                break;
+            }catch (EmailException e){
                 System.out.println(e.getMessage());
             }
         }
+        return email;
+
     }
+
 }

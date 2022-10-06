@@ -2,7 +2,7 @@ package furama_resort.models;
 
 public class Contact {
     private int numberContact;
-    private int bookingCode;
+    private String bookingCode;
     private double depositAmount;
     private double totalPayment;
     private String code;
@@ -10,7 +10,7 @@ public class Contact {
     public Contact() {
     }
 
-    public Contact(int numberContact, int bookingCode, double depositAmount, double totalPayment, String code) {
+    public Contact(int numberContact, String bookingCode, double depositAmount, double totalPayment, String code) {
         this.numberContact = numberContact;
         this.bookingCode = bookingCode;
         this.depositAmount = depositAmount;
@@ -26,11 +26,11 @@ public class Contact {
         this.numberContact = numberContact;
     }
 
-    public int getBookingCode() {
+    public String getBookingCode() {
         return bookingCode;
     }
 
-    public void setBookingCode(int bookingCode) {
+    public void setBookingCode(String bookingCode) {
         this.bookingCode = bookingCode;
     }
 
@@ -60,13 +60,7 @@ public class Contact {
 
     @Override
     public String toString() {
-        return "Contact{" +
-                "numberContact=" + numberContact +
-                ", bookingCode=" + bookingCode +
-                ", depositAmount=" + depositAmount +
-                ", totalPayment=" + totalPayment +
-                ", code='" + code + '\'' +
-                '}';
+        return String.format("%s,%s,%s,%s,%s",this.numberContact,this.bookingCode,this.depositAmount,this.totalPayment,this.code);
     }
     public String getInfo(){
         return String.format("%s,%s,%s,%s,%s",this.numberContact,this.bookingCode,this.depositAmount,this.totalPayment,this.code);

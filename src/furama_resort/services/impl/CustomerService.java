@@ -1,12 +1,11 @@
 package furama_resort.services.impl;
 
-import furama_resort.exception.CodeNameException;
-import furama_resort.exception.NameException;
 import furama_resort.models.Customer;
 import furama_resort.services.ICustomerService;
-import furama_resort.utils.ReadEmployeeUtil;
-import furama_resort.utils.ValidateUtil;
-import furama_resort.utils.WriteEmployeeUtil;
+import furama_resort.utils.ReadDataUtil;
+import furama_resort.utils.ValidateCustomerUtil;
+import furama_resort.utils.ValidateEmployeeUtil;
+import furama_resort.utils.WriteDataUtil;
 
 import java.io.IOException;
 import java.time.LocalDate;
@@ -20,26 +19,34 @@ public class CustomerService implements ICustomerService {
     private static List<Customer> customerList = new ArrayList<>();
     @Override
     public void addNew() throws IOException, DataFormatException {
-        customerList = ReadEmployeeUtil.readCustomerDataFromFile();
+        customerList = ReadDataUtil.readCustomerDataFromFile();
         Customer customer = this.getInfor();
         customerList.add(customer);
-        WriteEmployeeUtil.writeTofile(customerList);
+        WriteDataUtil.writeToCustomerFile(customerList);
 
 
     }
 
     @Override
-    public void display() throws IOException {
-        customerList = ReadEmployeeUtil.readCustomerDataFromFile();
-        for(Customer customer:customerList){
-            System.out.println(customer.getInfo());
+    public void display() {
+        customerList = ReadDataUtil.readCustomerDataFromFile();
+        if(customerList!=null) {
+            if (customerList.size() == 0) {
+                System.out.println("Danh sách trống !!!");
+            } else {
+                for (Customer customer : customerList) {
+                    System.out.println(customer.toString());
+                }
+
+            }
         }
+
 
     }
 
     @Override
     public void edit() throws IOException, DataFormatException {
-        customerList = ReadEmployeeUtil.readCustomerDataFromFile();
+        customerList = ReadDataUtil.readCustomerDataFromFile();
         System.out.println("Nhập mã khách hàng cần chỉnh sửa: ");
         String code = scanner.nextLine();
         boolean flag = true;
@@ -48,7 +55,7 @@ public class CustomerService implements ICustomerService {
                 Customer customer = this.getInfor();
                 customerList.set(i,customer);
                 System.out.println("Thông tin khách hàng đã được sửa !!!");
-                WriteEmployeeUtil.writeTofile(customerList);
+                WriteDataUtil.writeToCustomerFile(customerList);
                 flag = false;
                 break;
             }
@@ -59,44 +66,16 @@ public class CustomerService implements ICustomerService {
 
 
     }
-    private Customer getInfor() throws DataFormatException, IOException {
-        String code =  ValidateUtil.code();
-        String name = ValidateUtil.name();
-        LocalDate birthDay = ValidateUtil.birthDay();
-        String gender = ValidateUtil.gender();
-        int identityCard = ValidateUtil.identityCard();
-        System.out.println("Nhập số điện thoại: ");
-        int phoneNumber = Integer.parseInt(scanner.nextLine());
-        System.out.println("Nhập email: ");
-        String email = scanner.nextLine();
-        System.out.println("Nhập loại khách hàng: ");
-        System.out.println("1. Diamond");
-        System.out.println("2. Platinum");
-        System.out.println("3. Gold");
-        System.out.println("4. Silver");
-        System.out.println("5. Member");
-        String customerType = "";
-        int choise = Integer.parseInt(scanner.nextLine());
-        switch (choise){
-            case 1:
-                customerType = "Diamond";
-                break;
-            case 2:
-                customerType = "Platinum";
-                break;
-            case 3:
-                customerType = "Gold";
-                break;
-            case 4:
-                customerType = "Silver";
-                break;
-            case 5:
-                customerType = "Member";
-                break;
-
-        }
-        System.out.println("Nhập địa chỉ: ");
-        String address = scanner.nextLine();
+    private Customer getInfor() {
+        String code =  ValidateCustomerUtil.code();
+        String name = ValidateCustomerUtil.name();
+        LocalDate birthDay = ValidateCustomerUtil.birthDay();
+        String gender = ValidateCustomerUtil.gender();
+        int identityCard = ValidateCustomerUtil.identityCard();
+        int phoneNumber = ValidateCustomerUtil.phoneNumber();
+        String email = ValidateCustomerUtil.email();
+        String customerType = ValidateCustomerUtil.customerType();
+        String address = ValidateCustomerUtil.adrress();
         Customer customer = new Customer(code,name,birthDay,gender,identityCard,phoneNumber,email,customerType,address);
         return customer;
 

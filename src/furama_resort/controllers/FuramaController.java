@@ -1,6 +1,7 @@
 package furama_resort.controllers;
 
-import furama_resort.services.impl.CustomerService;
+import furama_resort.services.*;
+import furama_resort.services.impl.*;
 
 import java.io.IOException;
 import java.util.Scanner;
@@ -9,7 +10,11 @@ import java.util.zip.DataFormatException;
 public class FuramaController {
     private static Scanner scanner = new Scanner(System.in);
   public void displayMainMenu() throws IOException, DataFormatException {
-      CustomerService customerService = new CustomerService();
+      ICustomerService customerService = new CustomerService();
+      IEmployeeService employeeService = new EmployeeService();
+      IFacilityService facilityService = new FacilityService();
+      IBookingService bookingService = new BookingService();
+      IContactService contactService = new ContactService();
 
       while (true){
           System.out.println("***** RESORT FURAMA MANAGEMENT APPLICATION *****");
@@ -28,10 +33,13 @@ public class FuramaController {
                       choise =  menuEmployeeManagement();
                       switch (choise){
                           case 1:
+                              employeeService.display();
                               break;
                           case 2:
+                              employeeService.addNew();
                               break;
                           case 3:
+                              employeeService.edit();
                               break;
                           case 4:
                               displayMainMenu();
@@ -62,10 +70,13 @@ public class FuramaController {
                       choise = menuFacilityManagement();
                       switch (choise){
                           case 1:
+                              facilityService.display();
                               break;
                           case 2:
+                              facilityService.addNew();
                               break;
                           case 3:
+                              facilityService.displayListFacilityMaintenance();
                               break;
                           case 4:
                               displayMainMenu();
@@ -78,14 +89,19 @@ public class FuramaController {
                       choise = menuBookingManagement();
                       switch (choise){
                           case 1:
+                              bookingService.addNew();
                               break;
                           case 2:
+                              bookingService.display();
                               break;
                           case 3:
+                              contactService.addNew();
                               break;
                           case 4:
+                              contactService.display();
                               break;
                           case 5:
+                              contactService.edit();
                               break;
                           case 6:
                               displayMainMenu();

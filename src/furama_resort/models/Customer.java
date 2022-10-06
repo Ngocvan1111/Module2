@@ -34,10 +34,7 @@ public class Customer extends Person {
 
     @Override
     public String toString() {
-        return "Customer{" +
-                "customerType='" + customerType + '\'' +
-                ", address='" + address + '\'' +
-                '}';
+        return  String.format("%s,%s,%s",super.getInfo(), this.customerType, this.address);
     }
 
     public String getInfo() {

@@ -1,4 +1,4 @@
 package furama_resort.services;
 
-public interface IBookingService {
+public interface IBookingService extends InterfaceService {
 }

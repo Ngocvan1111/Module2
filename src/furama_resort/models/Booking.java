@@ -1,30 +1,30 @@
 package furama_resort.models;
 
 public class Booking {
-    private int bookingCode;
+    private String bookingCode;
     private String startDay;
     private String endDay;
     private String code;
-    private String serviceName;
+    private String serviceCode;
     private String typeForRent;
 
     public Booking() {
     }
 
-    public Booking(int bookingCode, String startDay, String endDay, String code, String serviceName, String typeForRent) {
+    public Booking(String bookingCode, String startDay, String endDay, String code, String serviceCode, String typeForRent) {
         this.bookingCode = bookingCode;
         this.startDay = startDay;
         this.endDay = endDay;
         this.code = code;
-        this.serviceName = serviceName;
+        this.serviceCode = serviceCode;
         this.typeForRent = typeForRent;
     }
 
-    public int getBookingCode() {
+    public String getBookingCode() {
         return bookingCode;
     }
 
-    public void setBookingCode(int bookingCode) {
+    public void setBookingCode(String bookingCode) {
         this.bookingCode = bookingCode;
     }
 
@@ -52,12 +52,12 @@ public class Booking {
         this.code = code;
     }
 
-    public String getServiceName() {
-        return serviceName;
+    public String getServiceCode() {
+        return serviceCode;
     }
 
-    public void setServiceName(String serviceName) {
-        this.serviceName = serviceName;
+    public void setServiceCode(String serviceCode) {
+        this.serviceCode = serviceCode;
     }
 
     public String getTypeForRent() {
@@ -70,16 +70,9 @@ public class Booking {
 
     @Override
     public String toString() {
-        return "Booking{" +
-                "bookingCode=" + bookingCode +
-                ", startDay='" + startDay + '\'' +
-                ", endDay='" + endDay + '\'' +
-                ", code='" + code + '\'' +
-                ", serviceName='" + serviceName + '\'' +
-                ", typeForRent='" + typeForRent + '\'' +
-                '}';
+        return String.format("%s,%s,%s,%s,%s,%s",this.bookingCode,this.startDay,this.endDay,this.code,this.serviceCode,this.typeForRent);
     }
     public String getInfo(){
-        return String.format("%s,%s,%s,%s,%s,%s",this.bookingCode,this.startDay,this.endDay,this.code,this.serviceName,this.typeForRent);
+        return String.format("%s,%s,%s,%s,%s,%s",this.bookingCode,this.startDay,this.endDay,this.code,this.serviceCode,this.typeForRent);
     }
 }

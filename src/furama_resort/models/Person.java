@@ -82,15 +82,7 @@ public abstract class Person {
 
     @Override
     public String toString() {
-        return "Person{" +
-                "code='" + code + '\'' +
-                ", name='" + name + '\'' +
-                ", birthday='" + birthday + '\'' +
-                ", gender='" + gender + '\'' +
-                ", identityCard=" + identityCard +
-                ", phoneNumber=" + phoneNumber +
-                ", email='" + email + '\'' +
-                '}';
+        return String.format("%s,%s,%s,%s,%s,%s,%s",this.code,this.name,this.birthday,this.gender,this.identityCard,this.phoneNumber,this.email);
     }
     public String getInfo(){
         return String.format("%s,%s,%s,%s,%s,%s,%s",this.code,this.name,this.birthday,this.gender,this.identityCard,this.phoneNumber,this.email);
