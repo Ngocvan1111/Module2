@@ -15,6 +15,7 @@ public class FuramaController {
       IFacilityService facilityService = new FacilityService();
       IBookingService bookingService = new BookingService();
       IContactService contactService = new ContactService();
+      IPromotionService promotionService = new PromotionService();
 
       while (true){
           System.out.println("***** RESORT FURAMA MANAGEMENT APPLICATION *****");
@@ -114,10 +115,15 @@ public class FuramaController {
                       choise = menuPromotionManagement();
                       switch (choise){
                           case 1:
+                              promotionService.displayCustomerListUseYearService();
                               break;
                           case 2:
+                              promotionService.displayCustomerListGetVoucher();
                               break;
                           case 3:
+                              promotionService.offerPromotionalVouchers();
+                              break;
+                          case 4:
                               displayMainMenu();
                       }
                   }
@@ -176,7 +182,8 @@ public class FuramaController {
       System.out.println("Select option by number!!");
       System.out.println("1. Display list customers use service");
       System.out.println("2. Display list customers get voucher");
-      System.out.println("3. Return main menu");
+      System.out.println("3. Offer promotional vouchers");
+      System.out.println("4. Return main menu");
       System.out.print("Select option: ");
       return Integer.parseInt(scanner.nextLine());
   }

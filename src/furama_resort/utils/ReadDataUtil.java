@@ -76,7 +76,7 @@ public class ReadDataUtil {
             return villaList;
 
         }catch (IOException e){
-            System.out.println("Danh sách rỗng");
+//            System.out.println("Danh sách rỗng");
         }
         return null;
 
@@ -99,7 +99,7 @@ public class ReadDataUtil {
             return houseList;
 
         }catch (IOException e){
-            System.out.println("Danh sách rỗng");
+//            System.out.println("Danh sách rỗng");
         }
         return null;
 
@@ -122,7 +122,7 @@ public class ReadDataUtil {
             return roomList;
 
         }catch (IOException e){
-            System.out.println("Danh sách rỗng");
+//            System.out.println("Danh sách rỗng");
         }
         return null;
 
@@ -145,7 +145,7 @@ public class ReadDataUtil {
             return bookingList;
 
         }catch (IOException e){
-            System.out.println("Danh sách rỗng !!!");
+//            System.out.println("Danh sách rỗng !!!");
         }
         return null;
 
@@ -168,7 +168,7 @@ public class ReadDataUtil {
             return contactList;
 
         }catch (IOException e){
-            System.out.println("Danh sách contact rỗng");
+//            System.out.println("Danh sách contact rỗng");
         }
         return null;
 
@@ -186,10 +186,10 @@ public class ReadDataUtil {
             String[] facilityArray;
             while ((line = bufferedReader.readLine()) != null){
                 facilityArray = line.split(",");
-                if(line.contains(villa.getServiceCode())){
+                if(line.contains("SVVL-")){
                     facilityList.add(new Villa(facilityArray[0],facilityArray[1],Double.parseDouble(facilityArray[2]), Double.parseDouble(facilityArray[3]) ,Integer.parseInt(facilityArray[4]), facilityArray[5],facilityArray[6],Double.parseDouble(facilityArray[7]),Integer.parseInt(facilityArray[8])));
                 }
-                else if(line.contains(house.getServiceCode())){
+                else if(line.contains("SVHO-")){
                     facilityList.add(new House(facilityArray[0],facilityArray[1],Double.parseDouble(facilityArray[2]), Double.parseDouble(facilityArray[3]) ,Integer.parseInt(facilityArray[4]), facilityArray[5],facilityArray[6],Integer.parseInt(facilityArray[7])));
                 }
                 else {
@@ -201,10 +201,10 @@ public class ReadDataUtil {
             return facilityList;
 
         }catch (NullPointerException e){
-            System.out.println("Danh sách villa rỗng");
+//            System.out.println("Danh sách villa rỗng");
         }
         catch (IOException e){
-            System.out.println("Danh sách rỗng");
+//            System.out.println("Danh sách rỗng");
         }
         return null;
 

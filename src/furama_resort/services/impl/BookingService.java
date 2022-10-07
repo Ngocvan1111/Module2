@@ -3,14 +3,13 @@ package furama_resort.services.impl;
 import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
 import furama_resort.models.*;
 import furama_resort.services.IBookingService;
+import furama_resort.utils.DayComparetor;
 import furama_resort.utils.ReadDataUtil;
+import furama_resort.utils.ValidateBookingUtil;
 import furama_resort.utils.WriteDataUtil;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 import java.util.zip.DataFormatException;
 
 public class BookingService implements IBookingService {
@@ -40,6 +39,10 @@ public class BookingService implements IBookingService {
     @Override
     public void display() throws IOException {
         bookingList = ReadDataUtil.readBookingDataFromFile();
+        DayComparetor dayComparetor = new DayComparetor();
+        assert bookingList != null;
+        bookingList.sort(dayComparetor);
+
         if(bookingList != null){
             if(bookingList.size() == 0){
                 System.out.println("Danh sách không có gì");
@@ -50,22 +53,14 @@ public class BookingService implements IBookingService {
                 }
             }
         }
-
-
     }
     private Booking getinfo(){
-        System.out.println("Input Booking Code");
-        String bookingcode = scanner.nextLine();
-        System.out.println("Input startDay");
-        String startDay = scanner.nextLine();
-        System.out.println("Input endDay");
-        String endDay = scanner.nextLine();
-        System.out.println("Input customer code");
-        String code = scanner.nextLine();
-        System.out.println("Input service Code");
-        String serviceCode = scanner.nextLine();
-        System.out.println("Input rental types");
-        String rentalTypes = scanner.nextLine();
+        String bookingcode = ValidateBookingUtil.bookingCode();
+        String startDay = ValidateBookingUtil.startDay();
+        String endDay = ValidateBookingUtil.endDay();
+        String code = ValidateBookingUtil.customerCode();
+        String serviceCode = ValidateBookingUtil.serviceCode();
+        String rentalTypes = ValidateBookingUtil.rentalTypes();
         Booking booking = new Booking(bookingcode,startDay,endDay,code,serviceCode,rentalTypes);
         return booking;
     }

@@ -47,15 +47,15 @@ public class ValidateUtil {
                 year = Integer.parseInt(dayOfBirthArr[0]);
                 month = Integer.parseInt(dayOfBirthArr[1]);
                 day = Integer.parseInt(dayOfBirthArr[2]);
-                if(year < LocalDate.now().getYear() -18){
+                if(year > LocalDate.now().getYear()){
                     throw new BirthdayException("not enough old ");
                 }
                 else if(year == LocalDate.now().getYear()){
-                    if( month <  LocalDate.now().getMonthValue()){
+                    if( month >  LocalDate.now().getMonthValue()){
                         throw new BirthdayException("not enough old");
                     }
                     else if(month == LocalDate.now().getMonthValue()){
-                        if(day < LocalDate.now().getDayOfMonth()){
+                        if(day > LocalDate.now().getDayOfMonth()){
                             throw new BirthdayException("not enough old");
                         }
                     }

@@ -1,15 +1,12 @@
 package furama_resort.utils;
 
-import furama_resort.exception.AreaException;
-import furama_resort.exception.NumberPeopleException;
-import furama_resort.exception.ServiceCodeException;
-import furama_resort.exception.ServiceNameException;
+import furama_resort.exception.*;
 import furama_resort.models.Room;
 
 import java.util.List;
 import java.util.Scanner;
 
-public class ValidateRoomUtil {
+public class ValidateRoomUtil extends ValidateFacilityUtil {
     private static Scanner scanner = new Scanner(System.in);
     public static String serviceCode(){
         List<Room> roomList = ReadDataUtil.readRoomDataFromFile();
@@ -35,72 +32,24 @@ public class ValidateRoomUtil {
             }return serviceCode;
 
     }
-    public static String serviceName(){
-        String regex ="^[A-ZĐ][a-záàảãạăâẩắằấầặẵẫêậéèẻẽẹếềểễệóòỏõọôốồổỗộơớờởỡợíìỉĩịđùúủũụưứửữựỷỹ]+$";
-        String serviceName;
+
+    public static String promotionService(){
+        String promotionService;
+        String regex = "[ ]+";
         while (true){
-            try{
-                System.out.println("Input serviceName");
-                serviceName = scanner.nextLine();
-                if(!serviceName.matches(regex)){
-                    throw new ServiceNameException("Lỗi định dạng!!");
+            try {
+                System.out.println("Nhập vào khuyến mãi đi kèm cho room");
+                promotionService = scanner.nextLine();
+                if(promotionService == null || promotionService.matches(regex)){
+                    throw new PromotionServiceException("Không được để trống !!");
                 }
                 break;
-            }catch (ServiceNameException e){
+
+            }catch (PromotionServiceException e){
                 System.out.println(e.getMessage());
             }
         }
-        return serviceName;
+        return promotionService;
     }
-    public static Double area(){
-        double area;
-        while (true){
-            try{
-                System.out.println("Nhập vào diện tích sử dụng ");
-                area = Double.parseDouble(scanner.nextLine());
-                if(area <=  30){
-                    throw new AreaException("Điện tích sử dụng quá nhỏ || area > 30 ||"+area);
-                }
-                break;
-            }catch (AreaException | NumberFormatException e){
-                System.out.println(e.getMessage());
-            }
-        }return area;
-
-    }
-    public static Double price(){
-        double price;
-        while (true){
-            try{
-                System.out.println("Nhập vào diện tích sử dụng ");
-                price = Double.parseDouble(scanner.nextLine());
-                if(price <  0){
-                    throw new AreaException("Lương không thể nhỏ hơn không || area < 0 ||"+price);
-                }
-                break;
-            }catch (AreaException | NumberFormatException e){
-                System.out.println(e.getMessage());
-            }
-        }return price;
-
-    }
-    public static int maxPeople(){
-        int people;
-        while (true){
-            try {
-                people = Integer.parseInt(scanner.nextLine());
-                if(people < 0 || people > 20){
-                    throw new NumberPeopleException("Số người không hợp lệ: 0 < people < 20 ||"+people);
-                }
-                break;
-            }catch (NumberPeopleException | NumberFormatException e){
-                System.out.println(e.getMessage());
-
-            }
-        }return people;
-
-    }
-
-
 
 }
